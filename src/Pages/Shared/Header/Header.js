@@ -5,16 +5,27 @@ import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const Header = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+        .then()
+        .catch()
+    }
 
     const menuItems = <>
         <li className='font-semibold'><Link to="/">Home</Link></li>
         {
             user?.uid
                 ?
-                <li className='font-semibold'><Link to="/orders">Orders</Link></li>
+                <>
+                    <li className='font-semibold'><Link to="/orders">Orders</Link></li>
+                    <li onClick={handleLogOut} className='font-semibold'>
+                        <button className='btn btn-success font-semibold'>Sign Out</button>
+                    </li>
+                </>
                 :
-                <li className='font-semibold'><Link to="/login">Login</Link></li>
+                <li className='font-semibold'><Link className='btn btn-success' to="/login">Login</Link></li>
         }
     </>
 
